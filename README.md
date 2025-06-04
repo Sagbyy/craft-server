@@ -37,7 +37,7 @@ craft-server/
 
 ```bash
 # Clone the project on the server
-git clone <repository-url> /opt/craft-server
+sudo git clone <repository-url> /opt/craft-server
 cd /opt/craft-server
 
 # Make scripts executable
@@ -45,5 +45,5 @@ chmod +x install.sh
 chmod +x scripts/init-setup.sh
 
 # Launch installation
-./install.sh
+sudo ./install.sh
 ```

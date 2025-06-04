@@ -42,6 +42,6 @@ chown -R "$USER:$USER" "$KEY_DIR"
 
 # 6. Create a ZIP archive containing the keys
 echo "[-] Creating ZIP archive for SSH keys..."
--u "$USER" zip -j "$ZIP_PATH" "$PRIVATE_KEY" "$PUBLIC_KEY"
+sudo -u "$USER" zip -j "$ZIP_PATH" "$PRIVATE_KEY" "$PUBLIC_KEY"
 
 echo "[✔] SSH setup complete. Archive created at: $ZIP_PATH"
