@@ -2,6 +2,7 @@
 set -e
 
 apt install -y openssh-server
+apt install -y zip
 
 # Enable and start SSH service
 systemctl enable ssh
