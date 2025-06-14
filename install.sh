@@ -27,3 +27,8 @@ if ask_step "Configuring SSH"; then
     echo "[+] Configuring SSH..."
     bash scripts/setup-ssh.sh
 fi
+
+if ask_step "Configuring ZSH"; then
+    echo "[+] Configuring ZSH..."
+    bash scripts/setup-zsh.sh
+fi
