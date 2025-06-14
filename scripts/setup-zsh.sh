@@ -5,7 +5,7 @@ set -e
 USER="modo"
 
 # 1. Install ZSH
-echo "[-] Installing ZSH..."
+echo "[-] Installing ZSH for $USER..."
 apt install -y zsh
 
 # 2. Set ZSH as default shell

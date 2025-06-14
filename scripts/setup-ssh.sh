@@ -10,6 +10,7 @@ systemctl start ssh
 
 
 # Variables
+USER="modo"
 KEY_DIR="/home/$USER/.ssh"
 PRIVATE_KEY="$KEY_DIR/id_rsa"
 PUBLIC_KEY="$KEY_DIR/id_rsa.pub"
