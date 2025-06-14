@@ -35,6 +35,11 @@ fi
 # Install Oh My ZSH
 su - $USER -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
 
+# Fix Oh My ZSH permissions
+echo "[-] Fixing Oh My ZSH permissions..."
+chmod -R g-w,o-w $HOME/.oh-my-zsh
+chown -R $USER:$USER $HOME/.oh-my-zsh
+
 # 5. Configuring Haribo Theme
 echo "[-] Configuring Haribo Theme..."
 git clone https://github.com/haribo/omz-haribo-theme.git $HOME/.oh-my-zsh/themes/haribo
