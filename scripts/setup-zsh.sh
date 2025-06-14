@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Variables
+USER="modo"
+
 # 1. Install ZSH
 echo "[-] Installing ZSH..."
 apt install -y zsh
@@ -11,7 +14,7 @@ chsh -s $(which zsh) $USER
 
 # 3. Copy .zshrc file
 echo "[-] Copying .zshrc file..."
-cp ../configs/.zshrc /home/$USER/.zshrc
+cp ./configs/.zshrc /home/$USER/.zshrc
 
 # 4. Changing shell to ZSH
 echo "[-] Changing shell to ZSH..."
