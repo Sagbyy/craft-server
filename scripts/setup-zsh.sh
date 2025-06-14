@@ -14,7 +14,14 @@ chsh -s $(which zsh) $USER
 
 # 3. Copy .zshrc file
 echo "[-] Copying .zshrc file..."
+
+if [ -e /home/$USER/.zshrc ]; then
+  echo "[-] Removing existing .zshrc file..."
+  rm /home/$USER/.zshrc
+fi
+
 cp ./configs/.zshrc /home/$USER/.zshrc
+chown $USER:$USER /home/$USER/.zshrc
 
 # 4. Installing Oh My ZSH
 echo "[-] Installing Oh My ZSH..."
