@@ -32,3 +32,9 @@ if ask_step "Configuring ZSH"; then
     echo "[+] Configuring ZSH..."
     bash scripts/setup-zsh.sh
 fi
+
+# ! Last step
+if ask_step "Configuring Haribo Theme"; then
+    echo "[+] Configuring Haribo Theme..."
+    bash scripts/setup-haribo-theme.sh
+fi

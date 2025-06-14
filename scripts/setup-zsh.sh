@@ -32,19 +32,11 @@ if [ -e /home/$USER/.oh-my-zsh ]; then
   rm -rf /home/$USER/.oh-my-zsh
 fi
 
-# Install Oh My ZSH
+# 5. Install Oh My ZSH
 su - $USER -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
 
-# Fix Oh My ZSH permissions
+# 6. Fix Oh My ZSH permissions
 echo "[-] Fixing Oh My ZSH permissions..."
 chmod -R g-w,o-w $HOME/.oh-my-zsh
 chown -R $USER:$USER $HOME/.oh-my-zsh
 
-# 5. Configuring Haribo Theme
-echo "[-] Configuring Haribo Theme..."
-git clone https://github.com/haribo/omz-haribo-theme.git $HOME/.oh-my-zsh/themes/haribo
-cp $HOME/.oh-my-zsh/themes/haribo/haribo.zsh-theme $HOME/.oh-my-zsh/custom/themes/haribo.zsh-theme
-
-# 6. Changing shell to ZSH (moved to the end)
-echo "[-] Changing shell to ZSH..."
-exec -l zsh
