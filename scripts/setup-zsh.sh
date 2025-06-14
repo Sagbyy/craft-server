@@ -25,7 +25,14 @@ chown $USER:$USER /home/$USER/.zshrc
 
 # 4. Installing Oh My ZSH
 echo "[-] Installing Oh My ZSH..."
+
+if [ -e /root/.oh-my-zsh ]; then
+  echo "[-] Removing existing Oh My ZSH directory..."
+  rm -rf /root/.oh-my-zsh
+fi
+
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+chown -R $USER:$USER /home/$USER/.oh-my-zsh
 
 # 5. Configuring Haribo Theme
 echo "[-] Configuring Haribo Theme..."
