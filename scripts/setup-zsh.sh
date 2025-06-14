@@ -11,7 +11,7 @@ chsh -s $(which zsh) $USER
 
 # 3. Copy .zshrc file
 echo "[-] Copying .zshrc file..."
-cp ../config/.zshrc /home/$USER/.zshrc
+cp ../configs/.zshrc /home/$USER/.zshrc
 
 # 4. Changing shell to ZSH
 echo "[-] Changing shell to ZSH..."
