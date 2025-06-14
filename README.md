@@ -4,8 +4,8 @@ A ready-to-deploy craft server project configured for Ubuntu Server 22.04 LTS.
 
 ## 📋 Server Specifications
 
-- **OS**: Ubuntu Server 22.04 LTS
-- **RAM**: 2 GB
+- **OS**: Ubuntu Server 24.04 LTS
+- **RAM**: 4 GB
 - **Storage**: 20 GB
 - **Architecture**: Server optimized for craft/gaming applications
 
@@ -37,7 +37,7 @@ craft-server/
 
 ```bash
 # Clone the project on the server
-sudo git clone <repository-url> /opt/craft-server
+sudo git clone <repository-url> /opt
 cd /opt/craft-server
 
 # Make scripts executable
