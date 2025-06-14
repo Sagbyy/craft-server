@@ -37,7 +37,7 @@ su - $USER -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohm
 
 # 5. Configuring Haribo Theme
 echo "[-] Configuring Haribo Theme..."
-git clone https://github.com/haribo/omz-haribo-theme.git $HOME/.oh-my-zsh/custom}/themes
+git clone https://github.com/haribo/omz-haribo-theme.git $HOME/.oh-my-zsh/themes
 
 # 6. Changing shell to ZSH (moved to the end)
 echo "[-] Changing shell to ZSH..."
