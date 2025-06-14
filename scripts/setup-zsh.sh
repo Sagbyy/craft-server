@@ -16,14 +16,14 @@ chsh -s $(which zsh) $USER
 echo "[-] Copying .zshrc file..."
 cp ./configs/.zshrc /home/$USER/.zshrc
 
-# 4. Changing shell to ZSH
-echo "[-] Changing shell to ZSH..."
-exec -l zsh
-
-# 5. Installing Oh My ZSH
+# 4. Installing Oh My ZSH
 echo "[-] Installing Oh My ZSH..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# 6. Configuring Haribo Theme
+# 5. Configuring Haribo Theme
 echo "[-] Configuring Haribo Theme..."
 git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# 6. Changing shell to ZSH (moved to the end)
+echo "[-] Changing shell to ZSH..."
+exec -l zsh
