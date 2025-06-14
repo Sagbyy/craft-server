@@ -20,6 +20,7 @@ SSHD_CONFIG="/etc/ssh/sshd_config"
 # 1. Update SSH configuration
 echo "[-] Updating SSH configuration..."
 sed -i.bak 's/^#\?PermitRootLogin .*/PermitRootLogin no/' "$SSHD_CONFIG"
+sed -i.bak 's/^#\?PasswordAuthentication .*/PasswordAuthentication yes/' "$SSHD_CONFIG"
 
 # 2. Restart SSH service
 echo "[-] Restarting SSH service..."
