@@ -3,6 +3,7 @@ set -e
 
 # Variables
 USER="modo"
+HOME="/home/$USER"
 
 # 1. Install ZSH
 echo "[-] Installing ZSH for $USER..."
