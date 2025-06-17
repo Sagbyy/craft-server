@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+# Initialize environment variables
+set -a
+source .env
+set +a
+
+echo "[🚨] Don't forget to set the environment variables in the .env file"
+
 ask_step() {
     read -p "⏩ [*] Would you want to execute this step : $1 ? [y/n] " response
 
