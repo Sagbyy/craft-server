@@ -9,21 +9,26 @@ A ready-to-deploy craft server project configured for Ubuntu Server 22.04 LTS.
 - **Storage**: 20 GB
 - **Architecture**: Server optimized for craft/gaming applications
 
-## 🏗️ Project Structure
+## 🛠️ Technologies & Services
 
-```
-craft-server/
-├── 📁 deliveries/          # Delivery and access files
-│   ├── vm-url.txt          # Virtual machine link
-│   └── root.txt            # Root access credentials
-├── 📁 database/            # Database configuration and scripts
-├── 📁 configs/             # Server configuration files
-├── 📁 scripts/             # Automation and maintenance scripts
-│   └── init-setup.sh       # Server initialization script
-├── 📁 cron/                # Cron jobs and automation
-├── install.sh              # Main installation script
-└── README.md               # Project documentation
-```
+### Core Technologies
+
+- **Node.js**: JavaScript runtime for the Strapi application
+- **PostgreSQL**: Primary database system
+- **Caddy**: Modern web server with automatic HTTPS
+- **Ngrok**: Secure tunnels for local development and testing
+
+### Development Environment
+
+- **ZSH**: Advanced shell with enhanced features
+- **Oh My Zsh**: Framework for managing ZSH configuration
+- **Haribo Theme**: Custom ZSH theme for better visibility and usability
+
+### Web Services
+
+- **Strapi**: Headless CMS for content management
+- **Caddy**: Reverse proxy and web server
+- **Ngrok**: Secure tunnel for external access
 
 ## 🚀 Getting Started
 
@@ -42,8 +47,29 @@ cd /opt/craft-server
 
 # Make scripts executable
 chmod +x install.sh
-chmod +x scripts/init-setup.sh
+chmod +x scripts/*.sh
 
 # Launch installation
 sudo ./install.sh
 ```
+
+### 3. **Strapi CMS Setup**
+
+The project includes a Strapi CMS application for content management. After the initial installation, the Strapi application will be automatically configured and started. You can access the admin panel at:
+
+```
+http://your-server-ip
+```
+
+Default credentials will be provided in the server setup output.
+
+### 4. **Development Environment**
+
+The server comes with a pre-configured development environment:
+
+- ZSH shell with Oh My Zsh framework
+- Custom Haribo theme for better visibility
+- Node.js and npm for JavaScript development
+- PostgreSQL for database management
+- Caddy for web serving with automatic HTTPS
+- Ngrok for secure tunneling (requires NGROK_AUTH_TOKEN in .env)
