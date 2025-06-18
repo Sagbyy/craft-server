@@ -38,7 +38,7 @@ npm run build
 # Start
 echo "[⚙️] Starting Strapi..."
 cd /opt/craft-server/strapi-app
-npm run start
+npm run start &
 
 # Configure Caddy
 echo "[⚙️] Configuring Caddy..."
@@ -55,4 +55,6 @@ if [ -z "$NGROK_AUTH_TOKEN" ]; then
     exit 1
 fi
 
-ngrok http 80
+ngrok http 80 &
+
+echo "[ℹ️] Ngrok is running on port 80, you can access the Strapi admin panel at http://<your-ip>"
