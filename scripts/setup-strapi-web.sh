@@ -15,7 +15,11 @@ apt install caddy
 
 # Install Node.js
 echo "[📡] Installing Node.js..."
-apt install -y nodejs npm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
+nvm install --lts
+nvm use --lts
 
 # Install Ngrok
 echo "[📡] Installing Ngrok..."
@@ -45,7 +49,7 @@ echo "[ℹ️] Caddy is running on port 80, you can access the Strapi admin pane
 
 # 6. Configure Ngrok
 echo "[⚙️] Configuring Ngrok..."
-# if environnement varibale $NGROK_TOKEN is not set, then exit
+
 if [ -z "$NGROK_AUTH_TOKEN" ]; then
     echo "[❌] NGROK_AUTH_TOKEN environment variable is not set"
     exit 1
