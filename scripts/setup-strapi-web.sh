@@ -27,22 +27,22 @@ snap install ngrok
 
 # Install Strapi
 echo "[📡] Installing Strapi..."
-cd /home/modo/strapi-app
+cd /opt/craft-server/strapi-app
 npm install
 
 # Build
 echo "[⚙️] Building Strapi..."
-cd /home/modo/strapi-app
+cd /opt/craft-server/strapi-app
 npm run build
 
 # Start
 echo "[⚙️] Starting Strapi..."
-cd /home/modo/strapi-app
+cd /opt/craft-server/strapi-app
 npm run start
 
 # Configure Caddy
 echo "[⚙️] Configuring Caddy..."
-cp /home/modo/configs/Caddyfile /etc/caddy/Caddyfile
+cp /opt/craft-server/configs/Caddyfile /etc/caddy/Caddyfile
 systemctl restart caddy
 
 echo "[ℹ️] Caddy is running on port 80, you can access the Strapi admin panel at http://<your-ip>"
