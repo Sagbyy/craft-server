@@ -1,0 +1,8 @@
+mkdir -p deliveries
+cat > deliveries/sftp-identifiers.txt <<EOF
+Utilisateur SFTP : sftpuser
+Mot de passe       : S3cur3P@ss!
+Dossier racine     : /srv/sftp/files
+Chroot             : activé (chroot_local_user=YES, allow_writeable_chroot=YES)
+Config vsftpd      : /etc/vsftpd.conf
+EOF
