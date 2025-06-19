@@ -14,18 +14,21 @@ DB_NAME="data-db"
 DB_USER="dbuser"
 DB_PASS="gTU1ZwxE92Z77H83a33OZ046"
 BACKUP_DIR="/opt/backup/postgresql"
-TIMESTAMP=$(date + '%F_%H-%M-%S')
+TIMESTAMP=$(date "+%F_%H-%M-%S")
 
 #crée mon dos de backup
 mkdir -p "$BACKUP_DIR"
 
-#compresse et redirige le dump vers le bon repertoire 
+#compresse et redirige le dump vers le bon repertoire
 PGPASSWORD="$DB_PASS" \
-    pg_dump -U "$DB_USER" -F c "DB_NAME" \
-    > "$BACKUP_DIR"/${DB_NAME}_${TIMESTAMP}.
-    
+  pg_dump -h localhost -p 5432 \
+          -U "$DB_USER" -F c "$DB_NAME" \
+  > "$BACKUP_DIR/${DB_NAME}_${TIMESTAMP}.dump"
+
 #supprimer tous les de plus de 7 jours
 find "$BACKUP_DIR" -type f -mtime +7 -delete
 
-#message de confirmation 
+#message de confirmation
 echo "Backup of ${DB_NAME} completed : $BACKUP_DIR/${DB_NAME}_${TIMESTAMP}.dump"
+
+
