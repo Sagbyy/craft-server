@@ -1,13 +1,5 @@
 #!/bin/bash
 
-#crée le fichier et luia attribuer des droits d'execution
-#sudo nano /usr/local/bin/backup_postgresql.sh
-#sudo chmod +x    /usr/local/bin/backup_postgresql.sh
-
-#pour tester manuellement et voir 
-#sudo /usr/local/bin/backup_postgresql.sh
-#ls -lh /opt/backup/postgresql
-
 set -euo pipefail
 
 DB_NAME="data-db"
