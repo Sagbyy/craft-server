@@ -1,27 +1,42 @@
 #!/bin/bash
-# database/init-db.sh
-# Script d'initialisation de PostgreSQL pou le projet
-
 set -euo pipefail
 
-# --- Variables---
+# Variables
 DB_NAME="data-db"
 DB_USER="dbuser"
 DB_PASSWORD="gTU1ZwxE92Z77H83a33OZ046"
-SCHEMA_FILE="$(dirname "$0")/schema.sql"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCHEMA_FILE="$SCRIPT_DIR/schema.sql"
 
-# 1) Switch vers l’utilisateur postgres
-sudo -u postgres bash <<EOF
+# 0) Rendre schema.sql lisible par postgres
+sudo chmod a+r "$SCHEMA_FILE"
+# Autoriser la traversée du chemin (si besoin)
+sudo chmod o+x "$(dirname "$SCRIPT_DIR")"
+sudo chmod o+x "$SCRIPT_DIR"
 
-# 2) Création de l’utilisateur et de la BDD
-psql <<PSQL
-CREATE USER ${DB_USER} WITH LOGIN PASSWORD '${DB_PASSWORD}';
-CREATE DATABASE "${DB_NAME}" OWNER ${DB_USER};
-GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${DB_USER};
-\connect "${DB_NAME}"
-\i '${SCHEMA_FILE}'
-PSQL
+# 1) Création du rôle si nécessaire
+sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='${DB_USER}'" | grep -q 1 \
+  || sudo -u postgres psql -c "CREATE USER ${DB_USER} WITH LOGIN PASSWORD '${DB_PASSWORD}';"
 
-EOF
+# 2) Création de la BDD si nécessaire
+sudo -u postgres psql -tAc "SELECT 1 FROM pg_database WHERE datname='${DB_NAME}'" | grep -q 1 \
+  || sudo -u postgres psql -c "CREATE DATABASE \"${DB_NAME}\" OWNER ${DB_USER};"
 
-echo "✅ Base '${DB_NAME}' créée avec l’utilisateur '${DB_USER}' et schéma appliqué."
+# 3) Appliquer le schéma
+sudo -u postgres psql -d "${DB_NAME}" -f "${SCHEMA_FILE}"
+
+# 4) Transférer la propriété des objets à dbuser et lui donner tous les droits
+sudo -u postgres psql -d "${DB_NAME}" <<SQL
+ALTER TABLE public.users              OWNER TO ${DB_USER};
+ALTER TABLE public.events             OWNER TO ${DB_USER};
+ALTER TABLE public.event_participants OWNER TO ${DB_USER};
+
+ALTER SEQUENCE users_id_seq              OWNER TO ${DB_USER};
+ALTER SEQUENCE events_id_seq             OWNER TO ${DB_USER};
+ALTER SEQUENCE event_participants_id_seq OWNER TO ${DB_USER};
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO ${DB_USER};
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO ${DB_USER};
+SQL
+
+echo "✅ Base '${DB_NAME}' prête : schéma appliqué et objets propriété de ${DB_USER}."
