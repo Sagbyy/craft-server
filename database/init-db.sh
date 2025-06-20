@@ -10,7 +10,7 @@ SCHEMA_FILE="$SCRIPT_DIR/schema.sql"
 
 # 0) Rendre schema.sql lisible par postgres
 sudo chmod a+r "$SCHEMA_FILE"
-# Autoriser la traversée du chemin (si besoin)
+# Autoriser la traversée du chemin 
 sudo chmod o+x "$(dirname "$SCRIPT_DIR")"
 sudo chmod o+x "$SCRIPT_DIR"
 
