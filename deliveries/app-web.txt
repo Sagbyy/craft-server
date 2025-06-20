@@ -1,0 +1,1 @@
+You can get the web application from : http://<vm-ip>:80 or with the Ngrok URL that the script returned you

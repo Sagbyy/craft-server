@@ -35,6 +35,11 @@ echo "[⚙️] Building Strapi..."
 cd /opt/craft-server/strapi-app
 npm run build
 
+# Seed
+echo "[⚙️] Seeding Strapi..."
+cd /opt/craft-server/strapi-app
+npm run seed:example
+
 # Start
 echo "[⚙️] Starting Strapi..."
 cd /opt/craft-server/strapi-app

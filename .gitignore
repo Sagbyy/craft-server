@@ -129,3 +129,15 @@ dist
 build
 .strapi-updater.json
 .strapi-cloud.json
+strapi-app/public/uploads/*.jpg
+strapi-app/public/uploads/*.webp
+strapi-app/public/uploads/*.avif
+strapi-app/public/uploads/*.png
+strapi-app/public/uploads/*.jpeg
+strapi-app/public/uploads/*.gif
+strapi-app/public/uploads/*.svg
+strapi-app/public/uploads/*.ico
+strapi-app/public/uploads/*.bmp
+strapi-app/public/uploads/*.tiff
+strapi-app/public/uploads/*.ico
+strapi-app/public/uploads/*.bmp

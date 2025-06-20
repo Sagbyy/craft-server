@@ -59,9 +59,129 @@
       "name": "Sarah Baker",
       "email": "sarahbaker@strapi.io",
       "avatar": "sarahbaker@strapi.io.jpg"
+    },
+    {
+      "name": "Salahe-eddine Bouhdjeur",
+      "email": "salahe-eddinebouhdjeu@strapi.io",
+      "avatar": "sagby-avatar.avif"
+    },
+    {
+      "name": "Mahamadou Gory Kante",
+      "email": "mahamadougorykante@strapi.io",
+      "avatar": "mahamadou-avatar.webp"
+    },
+    {
+      "name": "Raphael Kiffer",
+      "email": "raphaelkiffer@strapi.io",
+      "avatar": "raphael-avatar.jpg"
     }
   ],
   "articles": [
+    {
+      "title": "Les Ombres du Cyberespace",
+      "slug": "les-ombres-du-cyberespace",
+      "category": {
+        "id": 5
+      },
+      "author": {
+        "id": 1
+      },
+      "description": "Plongez dans la guerre invisible de l'espionnage numérique et de la cyberdéfense",
+      "cover": null,
+      "blocks": [
+        {
+          "__component": "shared.rich-text",
+          "body": "## Menaces Fantômes\n\nDans les profondeurs du numérique, les *menaces évoluent en silence*. Les groupes APT orchestrent des opérations complexes, traversant pare-feux et défenses nationales. - Porte dérobée dans les systèmes critiques - Menaces internes utilisant des tunnels chiffrés - Attaques coordonnées de botnets - Il ne s'agit plus de \"si\", mais de \"quand\".\n\n## Guerre Froide Numérique\n\nLes hackers étatiques et mercenaires numériques se livrent une guerre silencieuse. - Les failles comme EternalBlue sont toujours exploitées - Les infrastructures critiques sont devenues vulnérables - Seule règle : il n'y en a pas."
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Bruce Schneier",
+          "body": "Seuls les amateurs attaquent des machines ; les professionnels s'en prennent aux personnes."
+        },
+        {
+          "__component": "shared.media",
+          "file": "cyber-menace.jpg"
+        },
+        {
+          "__component": "shared.rich-text",
+          "body": "## Résilience Numérique\n\nChiffrement, détection, confiance zéro : le trio de la défense moderne. Mais la technologie seule ne suffit pas. Former les équipes, simuler des incidents, et adopter une stratégie adaptative sont essentiels pour survivre à un paysage numérique instable."
+        },
+        {
+          "__component": "shared.slider",
+          "files": ["cyber-menace.jpg", "cyber-defense.jpg"]
+        }
+      ]
+    },
+    {
+      "title": "Apprendre Sans Limites",
+      "slug": "apprendre-sans-limites",
+      "category": {
+        "id": 5
+      },
+      "author": {
+        "id": 1
+      },
+      "description": "Découvrez l'évolution fulgurante de l'IA générative et la collaboration machine",
+      "cover": null,
+      "blocks": [
+        {
+          "__component": "shared.rich-text",
+          "body": "## Une Nouvelle Ère Cognitive\n\nLes modèles de langage sont passés de curiosité à *révolution*. Ils codent, écrivent, prédisent, imaginent. - Les transformers repoussent les limites de l'intelligence - Les copilotes IA transforment le travail - Les hallucinations diminuent, mais subsistent\n\n## Au-delà du Test de Turing\n\nL'objectif n'est plus d'imiter l'humain, mais d'augmenter ses capacités. - Réseaux neuronaux créant de la poésie - IA assistant à la découverte de médicaments - Comportements émergents inattendus"
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Geoffrey Hinton",
+          "body": "Nous devons réfléchir sérieusement à la manière de construire des IA puissantes — car elles seront partout."
+        },
+        {
+          "__component": "shared.media",
+          "file": "ia-cerveau.jpg"
+        },
+        {
+          "__component": "shared.rich-text",
+          "body": "## Le Problème de l'Alignement\n\nFaire en sorte que l'IA respecte les valeurs humaines n'est plus une option. C’est un défi à la fois technique, éthique et existentiel — et le temps presse."
+        },
+        {
+          "__component": "shared.slider",
+          "files": ["ia-cerveau.jpg", "ia-laboratoire.webp"]
+        }
+      ]
+    },
+    {
+      "title": "Quand les Objets Parlent",
+      "slug": "quand-les-objets-parlent",
+      "category": {
+        "id": 5
+      },
+      "author": {
+        "id": 1
+      },
+      "description": "Une plongée dans l'univers du tout-connecté et des objets intelligents",
+      "cover": null,
+      "blocks": [
+        {
+          "__component": "shared.rich-text",
+          "body": "## Objets Connectés, Monde Réinventé\n\nLe quotidien est envahi de capteurs : *thermostats intelligents*, montres connectées, caméras, voitures. - L'IoT transforme les villes, les hôpitaux, l’agriculture - Mais chaque capteur est aussi une porte d’entrée - L'interopérabilité reste un défi majeur\n\n## Automatiser le Monde Physique\n\nDes frigos qui commandent eux-mêmes, des usines qui s'autoréparent, des champs agricoles surveillés par drone. - Les données deviennent l’or du XXIe siècle - Mais qui les contrôle ? Et qui les sécurise ?"
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Kevin Ashton",
+          "body": "L'Internet des objets signifie que l'Internet sera partout, même là où vous ne l'attendiez pas."
+        },
+        {
+          "__component": "shared.media",
+          "file": "iot-domotique.jpg"
+        },
+        {
+          "__component": "shared.rich-text",
+          "body": "## Entre Progrès et Surveillance\n\nL’IoT offre une efficacité inégalée. Mais il amène aussi une surveillance omniprésente. Trouver l’équilibre entre utilité et vie privée devient une question cruciale pour notre futur connecté."
+        },
+        {
+          "__component": "shared.slider",
+          "files": ["iot-domotique.jpg", "iot-smartcities.jpg"]
+        }
+      ]
+    },    
     {
       "title": "The internet's Own boy",
       "slug": "the-internet-s-own-boy",
