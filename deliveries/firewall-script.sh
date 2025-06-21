@@ -48,7 +48,11 @@ iptables -I OUTPUT -p tcp --dport 5432 -j ACCEPT # Accept all outgoing PostgreSQ
 iptables -I INPUT -p tcp --dport 2049 -j ACCEPT # Accept all incoming SFTP traffic
 iptables -I OUTPUT -p tcp --dport 2049 -j ACCEPT # Accept all outgoing SFTP traffic
 
+# Update the firewall rules
+sudo apt update
+sudo apt install iptables-persistent -y
+
 # Save rules
 sudo iptables-save > /etc/iptables/rules.v4
 
-echo "✅ Firewalls configured"
+echo "✅ Firewalls configured and persistent"
