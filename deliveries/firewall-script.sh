@@ -50,7 +50,11 @@ iptables -I OUTPUT -p tcp --dport 2049 -j ACCEPT # Accept all outgoing SFTP traf
 
 # Update the firewall rules
 sudo apt update
-sudo apt install iptables-persistent -y
+
+echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
+
+DEBIAN_FRONTEND=noninteractive sudo apt install iptables-persistent
 
 # Save rules
 sudo iptables-save > /etc/iptables/rules.v4
