@@ -51,9 +51,11 @@ iptables -I OUTPUT -p tcp --dport 2049 -j ACCEPT # Accept all outgoing SFTP traf
 # Update the firewall rules
 sudo apt update
 
+# Set the firewall rules to be persistent after reboot by using debconf-set-selections
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
 echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
 
+# The principe of DEBIAN_FRONTEND=noninteractive is to avoid the interactive mode of the package manager with the previous command
 DEBIAN_FRONTEND=noninteractive sudo apt install iptables-persistent
 
 # Save rules
