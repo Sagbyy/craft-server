@@ -6,13 +6,13 @@ source "$(dirname "$0")/../.env"
 set +a
 
 # Check if API key is set
-if [ -z "$OPENWEATHER_API_KEY" ]; then
-    echo "Error: OPENWEATHER_API_KEY environment variable is not set"
+if [ -z "$OPENWEATHERMAP_API_KEY" ]; then
+    echo "Error: OPENWEATHERMAP_API_KEY environment variable is not set"
     exit 1
 fi
 
 # Curl the API
-RESPONSE=$(curl -s "https://api.openweathermap.org/data/2.5/weather?lat=48.849145391082985&lon=2.3899166880099876&units=metric&appid=${OPENWEATHER_API_KEY}")
+RESPONSE=$(curl -s "https://api.openweathermap.org/data/2.5/weather?lat=48.849145391082985&lon=2.3899166880099876&units=metric&appid=${OPENWEATHERMAP_API_KEY}")
 
 # Check if curl was successful
 if [ $? -ne 0 ]; then
