@@ -41,3 +41,4 @@ fi
 
 echo "Next holiday: $next"
 exit 0
+
