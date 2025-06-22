@@ -41,3 +41,5 @@ echo "Hello $(whoami) ! We are $(date +%A) and the average temperature is ${AVER
 
 # Set the cron job for every day at 7:00 AM
 echo "0 7 * * * $(dirname "$0")/setup-meteo.sh" >> /etc/crontab
+
+echo "✅ Meteo setup completed"
