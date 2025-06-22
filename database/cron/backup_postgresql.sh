@@ -23,4 +23,5 @@ find "$BACKUP_DIR" -type f -mtime +7 -delete
 #message de confirmation
 echo "Backup of ${DB_NAME} completed : $BACKUP_DIR/${DB_NAME}_${TIMESTAMP}.dump"
 
-
+# Backup PostgreSQL tous les 2 jours à 02:04
+sudo sh -c 'echo "4 2 */2 * * root /usr/local/bin/backup_postgresql.sh >> /var/log/backup_pg.log 2>&1" >> /etc/crontab'
