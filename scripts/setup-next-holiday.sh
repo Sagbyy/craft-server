@@ -42,3 +42,5 @@ fi
 echo "Next holiday: $next"
 exit 0
 
+# Vérification du prochain jour férié chaque jour à 07:00
+sudo sh -c 'echo "0 7 * * * root /home/madox/craft/scripts/get-next-holiday.sh >> /var/log/next_holiday.log 2>&1" >> /etc/crontab'
