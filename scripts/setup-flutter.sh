@@ -3,7 +3,7 @@
 set -e
 
 # Configuration
-FLUTTER_SDK_PATH="/home/modo/flutter"
+FLUTTER_SDK_PATH="/opt/flutter"
 LOG_FILE="/var/log/flutter_check.log"
 USER="modo"
 SERVICE_PATH="/etc/systemd/system"
@@ -16,20 +16,27 @@ log_message() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
 }
 
-# Function to install Flutter SDK
+# Function to install Flutter SDK globally
 install_flutter() {
-    local user=$1
-    # Download and extract Flutter SDK
-    cd "/home/$user"
-    sudo -u "$user" git clone https://github.com/flutter/flutter.git -b stable
+    # Create Flutter directory
+    mkdir -p "$FLUTTER_SDK_PATH"
     
-    # Add Flutter to PATH for the user
-    if ! grep -q "export PATH=\"\$PATH:/home/$user/flutter/bin\"" "/home/$user/.bashrc"; then
-        echo "export PATH=\"\$PATH:/home/$user/flutter/bin\"" >> "/home/$user/.bashrc"
-    fi
+    # Download and extract Flutter SDK
+    cd /opt
+    git clone https://github.com/flutter/flutter.git -b stable
+    
+    # Make Flutter accessible to all users
+    chmod -R 755 "$FLUTTER_SDK_PATH"
+    
+    # Add Flutter to PATH system-wide
+    cat > /etc/profile.d/flutter.sh << 'EOL'
+export PATH="$PATH:/opt/flutter/bin"
+EOL
+    chmod 644 /etc/profile.d/flutter.sh
     
     # Initial setup of Flutter
-    sudo -u "$user" /home/$user/flutter/bin/flutter precache
+    export PATH="$PATH:/opt/flutter/bin"
+    flutter precache
 }
 
 # Create the user if it doesn't exist
@@ -63,14 +70,15 @@ if [ "$1" == "--check-only" ]; then
     # Check if Flutter SDK directory exists
     if [ ! -d "$FLUTTER_SDK_PATH" ]; then
         log_message "Flutter SDK not found. Installing..." >> "$LOG_FILE"
-        install_flutter "$USER"
+        install_flutter
         log_message "Flutter SDK installed successfully" >> "$LOG_FILE"
     fi
 
     log_message "Flutter SDK directory found at $FLUTTER_SDK_PATH" >> "$LOG_FILE"
 
     # Run flutter doctor and capture output
-    sudo -u "$USER" bash -c "source /home/$USER/.bashrc && $FLUTTER_SDK_PATH/bin/flutter doctor" > >(tee -a "$LOG_FILE") 2>&1
+    export PATH="$PATH:$FLUTTER_SDK_PATH/bin"
+    flutter doctor > >(tee -a "$LOG_FILE") 2>&1
     FLUTTER_DOCTOR_EXIT_CODE=$?
 
     # Check flutter doctor exit code
@@ -88,6 +96,13 @@ else
     chmod 644 "$SERVICE_PATH/flutter-check.service"
     chmod 644 "$SERVICE_PATH/flutter-check.timer"
     
+    # Install Flutter if not already installed
+    if [ ! -d "$FLUTTER_SDK_PATH" ]; then
+        echo "Installing Flutter SDK..."
+        install_flutter
+        echo "Flutter SDK installed successfully!"
+    fi
+    
     # Activate and start the service and the timer
     systemctl daemon-reload
     systemctl enable flutter-check.timer
@@ -98,4 +113,9 @@ else
     echo "To see logs: cat $LOG_FILE"
     echo "To see the timer status: systemctl status flutter-check.timer"
     echo "To check now: systemctl start flutter-check.service"
+    echo ""
+    echo "Flutter is now installed and available system-wide"
+    echo "Please log out and log back in, or run:"
+    echo "source /etc/profile.d/flutter.sh"
+    echo "to start using Flutter immediately"
 fi
