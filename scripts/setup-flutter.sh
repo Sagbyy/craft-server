@@ -3,7 +3,7 @@
 set -e
 
 # Configuration
-FLUTTER_SDK_PATH="/opt/flutter"
+FLUTTER_SDK_PATH="/boot/flutter"
 LOG_FILE="/var/log/flutter_check.log"
 USER="modo"
 SERVICE_PATH="/etc/systemd/system"
@@ -18,11 +18,14 @@ log_message() {
 
 # Function to install Flutter SDK globally
 install_flutter() {
+    # Clean up any failed installation
+    rm -rf "$FLUTTER_SDK_PATH"
+    
     # Create Flutter directory
     mkdir -p "$FLUTTER_SDK_PATH"
     
     # Download and extract Flutter SDK
-    cd /opt
+    cd /boot
     git clone https://github.com/flutter/flutter.git -b stable
     
     # Make Flutter accessible to all users
@@ -30,13 +33,14 @@ install_flutter() {
     
     # Add Flutter to PATH system-wide
     cat > /etc/profile.d/flutter.sh << 'EOL'
-export PATH="$PATH:/opt/flutter/bin"
+export PATH="$PATH:/boot/flutter/bin"
 EOL
     chmod 644 /etc/profile.d/flutter.sh
     
     # Initial setup of Flutter
-    export PATH="$PATH:/opt/flutter/bin"
-    flutter precache
+    export PATH="$PATH:/boot/flutter/bin"
+    # Run flutter precache with minimal components to save space
+    flutter precache --no-android --no-ios --no-linux --no-macos --no-windows --no-fuchsia
 }
 
 # Create the user if it doesn't exist
