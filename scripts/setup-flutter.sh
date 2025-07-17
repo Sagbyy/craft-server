@@ -11,6 +11,27 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 INSTALL_DIR="/opt/craft-server/scripts"
 
+# Function to log messages with timestamp
+log_message() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
+}
+
+# Function to install Flutter SDK
+install_flutter() {
+    local user=$1
+    # Download and extract Flutter SDK
+    cd "/home/$user"
+    sudo -u "$user" git clone https://github.com/flutter/flutter.git -b stable
+    
+    # Add Flutter to PATH for the user
+    if ! grep -q "export PATH=\"\$PATH:/home/$user/flutter/bin\"" "/home/$user/.bashrc"; then
+        echo "export PATH=\"\$PATH:/home/$user/flutter/bin\"" >> "/home/$user/.bashrc"
+    fi
+    
+    # Initial setup of Flutter
+    sudo -u "$user" /home/$user/flutter/bin/flutter precache
+}
+
 # Create the user if it doesn't exist
 if ! id "$USER" &>/dev/null; then
     useradd -m -s /bin/bash "$USER"
@@ -31,11 +52,6 @@ fi
 chmod 755 "$INSTALL_DIR/setup-flutter.sh"
 chown "$USER:$USER" "$INSTALL_DIR/setup-flutter.sh"
 
-# Function to log messages with timestamp
-log_message() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
-}
-
 # If the script is called with --check-only, run only the check
 if [ "$1" == "--check-only" ]; then
     # Clear previous log file
@@ -46,19 +62,16 @@ if [ "$1" == "--check-only" ]; then
 
     # Check if Flutter SDK directory exists
     if [ ! -d "$FLUTTER_SDK_PATH" ]; then
-        log_message "ERROR: Flutter SDK directory not found at $FLUTTER_SDK_PATH" >> "$LOG_FILE"
-        exit 1
+        log_message "Flutter SDK not found. Installing..." >> "$LOG_FILE"
+        install_flutter "$USER"
+        log_message "Flutter SDK installed successfully" >> "$LOG_FILE"
     fi
 
     log_message "Flutter SDK directory found at $FLUTTER_SDK_PATH" >> "$LOG_FILE"
 
     # Run flutter doctor and capture output
-    FLUTTER_DOCTOR_OUTPUT=$($FLUTTER_SDK_PATH/bin/flutter doctor 2>&1)
+    sudo -u "$USER" bash -c "source /home/$USER/.bashrc && $FLUTTER_SDK_PATH/bin/flutter doctor" > >(tee -a "$LOG_FILE") 2>&1
     FLUTTER_DOCTOR_EXIT_CODE=$?
-
-    # Log flutter doctor output
-    log_message "Flutter Doctor Output:" >> "$LOG_FILE"
-    echo "$FLUTTER_DOCTOR_OUTPUT" >> "$LOG_FILE"
 
     # Check flutter doctor exit code
     if [ $FLUTTER_DOCTOR_EXIT_CODE -eq 0 ]; then
