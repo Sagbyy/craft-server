@@ -23,9 +23,11 @@ touch "$LOG_FILE"
 chown "$USER:$USER" "$LOG_FILE"
 chmod 644 "$LOG_FILE"
 
-# Create installation directory and copy script
+# Create installation directory and copy script if needed
 mkdir -p "$INSTALL_DIR"
-cp "$SCRIPT_DIR/setup-flutter.sh" "$INSTALL_DIR/"
+if [ "$SCRIPT_DIR" != "$INSTALL_DIR" ]; then
+    cp "$SCRIPT_DIR/setup-flutter.sh" "$INSTALL_DIR/"
+fi
 chmod 755 "$INSTALL_DIR/setup-flutter.sh"
 chown "$USER:$USER" "$INSTALL_DIR/setup-flutter.sh"
 
