@@ -9,6 +9,7 @@ USER="modo"
 SERVICE_PATH="/etc/systemd/system"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+INSTALL_DIR="/opt/craft-server/scripts"
 
 # Create the user if it doesn't exist
 if ! id "$USER" &>/dev/null; then
@@ -22,9 +23,11 @@ touch "$LOG_FILE"
 chown "$USER:$USER" "$LOG_FILE"
 chmod 644 "$LOG_FILE"
 
-# Ensure script directory is accessible
-chmod 755 "$SCRIPT_DIR"
-chmod 755 "$PROJECT_ROOT/scripts/setup-flutter.sh"
+# Create installation directory and copy script
+mkdir -p "$INSTALL_DIR"
+cp "$SCRIPT_DIR/setup-flutter.sh" "$INSTALL_DIR/"
+chmod 755 "$INSTALL_DIR/setup-flutter.sh"
+chown "$USER:$USER" "$INSTALL_DIR/setup-flutter.sh"
 
 # Function to log messages with timestamp
 log_message() {
