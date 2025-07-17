@@ -186,6 +186,7 @@ sudo bash database/cron/backup_postgresql.sh
 - `scripts/setup-sftp.sh`: SFTP configuration
 - `scripts/setup-firewalls.sh`: Firewall configuration
 - `scripts/setup-meteo.sh`: Weather integration
+- `scripts/setup-flutter.sh`: Flutter installation
 
 ### 🛠️ Maintenance
 

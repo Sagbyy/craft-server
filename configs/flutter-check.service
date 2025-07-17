@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=oneshot
-User=flutter_user
-ExecStart=/bin/bash /opt/craft-server/scripts/setup-flutter.sh
+User=modo
+ExecStart=/bin/bash /opt/craft-server/scripts/setup-flutter shsetup-flutter.sh --check-only
 StandardOutput=append:/var/log/flutter_check.log
 StandardError=append:/var/log/flutter_check.log
 

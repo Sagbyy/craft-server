@@ -12,14 +12,19 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
 # Create the user if it doesn't exist
 if ! id "$USER" &>/dev/null; then
-    useradd -r -s /bin/bash "$USER"
-    mkdir -p "/home/$USER"
-    chown "$USER:$USER" "/home/$USER"
+    useradd -m -s /bin/bash "$USER"
+    # Add user to necessary groups
+    usermod -aG sudo "$USER"
 fi
 
 # Create the log file and configure the permissions
 touch "$LOG_FILE"
 chown "$USER:$USER" "$LOG_FILE"
+chmod 644 "$LOG_FILE"
+
+# Ensure script directory is accessible
+chmod 755 "$SCRIPT_DIR"
+chmod 755 "$PROJECT_ROOT/scripts/setup-flutter.sh"
 
 # Function to log messages with timestamp
 log_message() {
@@ -62,6 +67,8 @@ else
     # Copy the service and timer files
     cp "$PROJECT_ROOT/configs/flutter-check.service" "$SERVICE_PATH/"
     cp "$PROJECT_ROOT/configs/flutter-check.timer" "$SERVICE_PATH/"
+    chmod 644 "$SERVICE_PATH/flutter-check.service"
+    chmod 644 "$SERVICE_PATH/flutter-check.timer"
     
     # Activate and start the service and the timer
     systemctl daemon-reload
