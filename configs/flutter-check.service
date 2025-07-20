@@ -1,0 +1,13 @@
+[Unit]
+Description=Flutter Environment Integrity Check
+After=network.target
+
+[Service]
+Type=oneshot
+User=modo
+ExecStart=/bin/bash /opt/craft-server/scripts/setup-flutter.sh --check-only
+StandardOutput=append:/var/log/flutter_check.log
+StandardError=append:/var/log/flutter_check.log
+
+[Install]
+WantedBy=multi-user.target 

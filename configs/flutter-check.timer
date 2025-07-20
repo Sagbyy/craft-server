@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Flutter Environment Check Daily
+Requires=flutter-check.service
+
+[Timer]
+Unit=flutter-check.service
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target 
