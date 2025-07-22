@@ -19,7 +19,7 @@ json=$(curl -sSf "$API_URL") || {
   exit 1
 }
 
-# recherche du prochain jour férié
+# search du prochain jour férié
 #    - to_entries : transforme {date:nom,...} en [{key,date, value:nom},...]
 #    - select(.key > TODAY) : ne garde que les dates après aujourd'hui
 #    - sort_by(.key) : tri chronologique
