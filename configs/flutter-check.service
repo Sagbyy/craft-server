@@ -1,8 +1,0 @@
-[Unit]
-Description=Vérification quotidienne de l’intégrité Flutter
-After=network.target
-
-[Service]
-Type=oneshot
-User=flutteruser
-ExecStart=/opt/flutter_check/check_flutter.sh
